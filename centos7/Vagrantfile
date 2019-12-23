@@ -4,17 +4,17 @@
 require 'ffi'
 
 Vagrant.configure("2") do |config|
-    config.vm.box = "centos/7"
+    config.vm.box = "centos/8"
     config.vm.box_check_update = true
 
     # configure VM
-    config.vm.hostname = 'centos.umacademy.local'
+    config.vm.hostname = 'centos.dwz.local'
     config.vm.network "private_network", ip: '192.168.7.225'
 
     config.vm.provider "virtualbox" do |v|
         v.memory = 4096
         v.cpus = 2
-        v.name = 'centos.umacademy.local'
+        v.name = 'centos.dwz.local'
     end
 
     if FFI::Platform::IS_MAC
