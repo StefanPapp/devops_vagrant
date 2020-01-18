@@ -4,25 +4,27 @@
 require 'ffi'
 
 Vagrant.configure("2") do |config|
-    config.vm.box = "centos/7"
+    config.vm.box = "centos/8"
     config.vm.box_check_update = true
 
     # configure VM
     config.vm.hostname = 'centos.dwz.local'
     config.vm.network "private_network", ip: '192.168.7.225'
-    config.vm.synced_folder "/user/stefanpapp/workspace", "/workspace" 
 
-    config.vm.provider "parallels" do |prl|
-        prl.update_guest_tools = true
-        prl.memory = 4096
-        prl.cpus = 2
-        prl.name = 'centos.dwz.local'
+    config.vm.provider "virtualbox" do |v|
+        v.memory = 4096
+        v.cpus = 2
+        v.name = 'centos.dwz.local'
     end
 
     if FFI::Platform::IS_MAC
         # configure host updater plugin - https://github.com/cogitatio/vagrant-hostsupdater
-        config.hostsupdater.aliases = ["kubernetes"]
+        config.hostsupdater.aliases = ["spark"]
 
+        # configure VirtualBox Guest Additions plugin - https://github.com/dotless-de/vagrant-vbguest
+        config.vbguest.auto_update = true
+        config.vbguest.no_remote = true
+        config.vbguest.no_install = false
     end
 
     config.vm.provision "Install", type: "shell", keep_color: "true", path: "install.sh"
