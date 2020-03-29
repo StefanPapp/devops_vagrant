@@ -1,9 +1,9 @@
 #!/bin/sh
 sudo apt update
-# sudo apt upgrade --yes --force-yes 
+# sudo apt upgrade --yes --force-yes
 
 # devs
-sudo apt install -y git git-extras fd-find thefuck tig hub wget neovim tmux zplug zsh peco lnav silversearcher-ag mc ranger tree aria2c
+sudo apt install -y git curl git-extras fd-find thefuck tig hub wget neovim tmux zplug zsh peco lnav silversearcher-ag mc ranger tree aria2
 
 # python development install
 sudo apt install -y python3 python3-pip

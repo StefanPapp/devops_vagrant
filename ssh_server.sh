@@ -5,4 +5,4 @@ export DISTRIBUTION="debian/buster64"
 
 #export PROVIDER="parallels"
 export PROVIDER="virtualbox"
-vagrant up
+vagrant ssh
