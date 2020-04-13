@@ -1,24 +1,40 @@
 #!/bin/sh
 sudo apt update
+# reduce the number of interaction. 
 # sudo apt upgrade --yes --force-yes 
 
-# devs
-sudo apt install -y git git-extras fd-find thefuck tig hub wget neovim tmux zplug zsh peco lnav silversearcher-ag mc ranger tree aria2c
+# git
+sudo apt install -y git git-extras tig hub wget 
+
+# productivity
+sudo apt install -y fd-find thefuck wget neovim tmux zplug zsh peco lnav silversearcher-ag mc ranger tree aria2
 
 # python development install
 sudo apt install -y python3 python3-pip
 
+# kotlin
+sudo apt install -y default-jdk
+
+wget -O sdk.install.sh "https://get.sdkman.io"
+apt install zip unzip -y
+bash sdk.install.sh
+source "/root/.sdkman/bin/sdkman-init.sh"
+sdk install kotlin
+
+
 #zsh
-export ZSH_CUSTOM=~/.oh-my-zsh/custom
+ZSH_CUSTOM=~/.oh-my-zsh/custom
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-completions $ZSH_CUSTOM/plugins/zsh-completions
 git clone https://github.com/zdharma/fast-syntax-highlighting.git $ZSH_CUSTOM/plugins/fast-syntax-highlighting
 git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 
+sed -i -e "s/plugins=(git)/plugins=(git osx z vagrant docker sudo vi-mode fast-syntax-highlighting zsh-completions)/g" .zshrc
+
 # vim
 git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
-
+alias nvim=vim
 # git
 git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze
 ~/.scm_breeze/install.sh

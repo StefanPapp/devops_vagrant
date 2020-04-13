@@ -1,8 +1,13 @@
 #!/bin/bash
-export DISTRIBUTION="generic/debian10"
+cp ./Vagrantfile.template Vagrantfile
+DISTRIBUTION='generic\/debian10'
 # export DISTRIBUTION="debian/buster64"
 # export DISTRIBUTION="centos/8"
 
-export PROVIDER="parallels"
+PROVIDER="parallels"
 # export PROVIDER="virtualbox"
-vagrant up
+
+HOSTNAME="devserver"
+
+sed -i -e "s/DISTRIBUTION/$DISTRIBUTION/g ; s/PROVIDER/$PROVIDER/g ; s/HOSTNAME/$HOSTNAME/g" Vagrantfile
+
